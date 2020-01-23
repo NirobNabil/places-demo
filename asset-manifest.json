@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/places-demo/static/css/main.6f404bb4.chunk.css",
+    "main.js": "/places-demo/static/js/main.2737a222.chunk.js",
+    "main.js.map": "/places-demo/static/js/main.2737a222.chunk.js.map",
+    "runtime-main.js": "/places-demo/static/js/runtime-main.617a779b.js",
+    "runtime-main.js.map": "/places-demo/static/js/runtime-main.617a779b.js.map",
+    "static/css/2.624e4bf4.chunk.css": "/places-demo/static/css/2.624e4bf4.chunk.css",
+    "static/js/2.fe1f56e4.chunk.js": "/places-demo/static/js/2.fe1f56e4.chunk.js",
+    "static/js/2.fe1f56e4.chunk.js.map": "/places-demo/static/js/2.fe1f56e4.chunk.js.map",
+    "index.html": "/places-demo/index.html",
+    "precache-manifest.e6a1e50e83f2929f6bbae2dff5904c40.js": "/places-demo/precache-manifest.e6a1e50e83f2929f6bbae2dff5904c40.js",
+    "service-worker.js": "/places-demo/service-worker.js",
+    "static/css/2.624e4bf4.chunk.css.map": "/places-demo/static/css/2.624e4bf4.chunk.css.map",
+    "static/css/main.6f404bb4.chunk.css.map": "/places-demo/static/css/main.6f404bb4.chunk.css.map",
+    "static/js/2.fe1f56e4.chunk.js.LICENSE": "/places-demo/static/js/2.fe1f56e4.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.617a779b.js",
+    "static/css/2.624e4bf4.chunk.css",
+    "static/js/2.fe1f56e4.chunk.js",
+    "static/css/main.6f404bb4.chunk.css",
+    "static/js/main.2737a222.chunk.js"
+  ]
+}
