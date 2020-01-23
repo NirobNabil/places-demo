@@ -48,7 +48,7 @@ class HorizontalLoginForm extends React.Component {
         <Form.Item validateStatus={passwordError ? 'error' : ''} help={passwordError || ''}>
         <Select
           mode="multiple"
-          style={{ minWidth: '30em', flexGrow: '1' }}
+          style={{ width: '40em', flexGrow: '1' }}
           placeholder="Please select"
           defaultValue={['restaurant']}
         >
