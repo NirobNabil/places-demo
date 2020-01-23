@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ed74fb3395dddb54bb04a35af7794cfc",
+    "revision": "514bebc60b10d963dcb52f4d9812eeba",
     "url": "/places-demo/index.html"
   },
   {
-    "revision": "dde257c27a53f44089e9",
+    "revision": "f42afcf7e22f6a68e5b2",
     "url": "/places-demo/static/css/2.624e4bf4.chunk.css"
   },
   {
-    "revision": "9a8c3d39a7469d562cc7",
+    "revision": "a503a37dc6b365f988a1",
     "url": "/places-demo/static/css/main.6f404bb4.chunk.css"
   },
   {
-    "revision": "dde257c27a53f44089e9",
-    "url": "/places-demo/static/js/2.fe1f56e4.chunk.js"
+    "revision": "f42afcf7e22f6a68e5b2",
+    "url": "/places-demo/static/js/2.16f95ff8.chunk.js"
   },
   {
     "revision": "409e88028c833aab3b5c4200318b3af2",
-    "url": "/places-demo/static/js/2.fe1f56e4.chunk.js.LICENSE"
+    "url": "/places-demo/static/js/2.16f95ff8.chunk.js.LICENSE"
   },
   {
-    "revision": "9a8c3d39a7469d562cc7",
-    "url": "/places-demo/static/js/main.2737a222.chunk.js"
+    "revision": "a503a37dc6b365f988a1",
+    "url": "/places-demo/static/js/main.3278328c.chunk.js"
   },
   {
     "revision": "c87740f63d27e9aca439",
