@@ -11,7 +11,7 @@ function App() {
       <div className="search"><SearchBar /></div>
       <div className="result">
         <div className="map"><Map places={ 
-          [{ name: "Gg", coordinate:{lattitude:-1.2884,longitude:36.8233} }] }
+          [{ name: "Gg", coordinate:{latitude:-1.2884,longitude:36.8233} }] }
         />
         </div>
         <div className="table"><Table /></div>
