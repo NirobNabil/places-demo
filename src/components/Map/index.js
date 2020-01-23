@@ -52,6 +52,9 @@ class MapContainer extends React.Component {
       });
     }
   }
+  componentDidUpdate = () => {
+    console.log(this.props.places)
+  }
   panMapTo = () => {
 
   }
@@ -79,6 +82,7 @@ class MapContainer extends React.Component {
         {this.props.places.map( place => {
           return (
             <Marker
+              key={place.coordinate.latitude}
               onClick={this.onMarkerClick}
               name={place.name}
               position={{lat: place.coordinate.latitude, lng: place.coordinate.longitude}}

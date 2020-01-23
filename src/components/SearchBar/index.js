@@ -7,20 +7,26 @@ function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 
-class HorizontalLoginForm extends React.Component {
-  componentDidMount() {
-    // To disable submit button at the beginning.
-    this.props.form.validateFields();
+class SearchBarForm extends React.Component {
+  constructor(props){
+    super(props)
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        console.log("went");
+        this.props.addMarker(values);
       }
     });
   };
+
+  componentDidMount() {
+    // To disable submit button at the beginning.
+    this.props.form.validateFields();
+  }
 
   render() {
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
@@ -28,35 +34,45 @@ class HorizontalLoginForm extends React.Component {
     // Only show error after a field is touched.
     const usernameError = isFieldTouched('username') && getFieldError('username');
     const passwordError = isFieldTouched('password') && getFieldError('password');
+
+    // Only show error after a field is touched.
+    //const usernameError = isFieldTouched('username') && getFieldError('username');
+    //const passwordError = isFieldTouched('password') && getFieldError('password');
     return (
       <Form layout="inline" onSubmit={this.handleSubmit}>
-        <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
-          <Input
-            placeholder="Lattitude"
-          />,
+        <Form.Item validateStatus="success">
+          {getFieldDecorator('latitude', {
+            rules: [{ required: true, message: 'Please input your Latitude!' }],
+          })(
+            <Input
+              placehoder="Latitude"
+            />,
+          )}
         </Form.Item>
-        <Form.Item validateStatus={passwordError ? 'error' : ''} help={passwordError || ''}>
-          <Input
-            placeholder="Longitude"
-          />,
+        <Form.Item validateStatus="success">
+          {getFieldDecorator('longitude', {
+            rules: [{ required: true, message: 'Please input your Longitude' }],
+          })(
+            <Input
+              placeholder="Longitude"
+            />,
+          )}
         </Form.Item>
-        <Form.Item validateStatus={passwordError ? 'error' : ''} help={passwordError || ''}>
-          <Input
-            placeholder="Range"
-          />,
-        </Form.Item>
-        <Form.Item validateStatus={passwordError ? 'error' : ''} help={passwordError || ''}>
-        <Select
-          mode="multiple"
-          style={{ width: '40em', flexGrow: '1' }}
-          placeholder="Please select"
-          defaultValue={['restaurant']}
-        >
-          {['restaurants', 'coffee shop', 'park', 'theatre', 'shopping mall'].map( elem => <Option key={elem}> {elem} </Option> ) }
-        </Select>
+        <Form.Item validateStatus="success">
+          {getFieldDecorator('filters', {
+            rules: [{ required: true, message: 'Please input your Longitude' }],
+          })(
+            <Select
+              mode="multiple"
+              style={{ width: '40em', flexGrow: '1' }}
+              placeholder="Please select"
+            >
+              {['restaurants', 'coffee shop', 'park', 'theatre', 'shopping mall'].map( elem => <Option key={elem}> {elem} </Option> ) }
+            </Select>
+          )}
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
+          <Button type="primary" htmlType="submit">
             Submit
           </Button>
         </Form.Item>
@@ -65,6 +81,6 @@ class HorizontalLoginForm extends React.Component {
   }
 }
 
-const WrappedHorizontalLoginForm = Form.create({ name: 'horizontal_login' })(HorizontalLoginForm);
+const SearchBar = Form.create({ name: 'SearchBar' })(SearchBarForm);
 
-export default WrappedHorizontalLoginForm;
+export default SearchBar;
