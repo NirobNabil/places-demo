@@ -14,7 +14,7 @@ class App extends React.Component {
 
   addMarker (fields) {
     let gged = this.state.selectedPlaces;
-    gged.push({ 'key':fields.latitude*Math.random() , name: "Gg", coordinate:{'latitude':fields.latitude,'longitude':fields.longitude } })
+    gged.push({'latitude':fields.latitude,'longitude':fields.longitude })
     this.setState({
       selectedPlaces: gged
     });
@@ -26,7 +26,9 @@ class App extends React.Component {
       <div className="motherContainer">
         <div className="search"><SearchBar addMarker={this.addMarker.bind(this)} /></div>
         <div className="result">
-          <div className="map"><Map places={this.state.selectedPlaces} />
+          <div className="map"><Map places={
+            this.state.selectedPlaces.map(place => {return {name: "gg", coordinate:{'latitude':place.latitude,'longitude':place.longitude }}})
+          }/>
           </div>
           <div className="table"><Table /></div>
         </div>
