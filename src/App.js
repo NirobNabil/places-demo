@@ -13,7 +13,8 @@ class App extends React.Component {
       mapCenter: {},
       getPlaces: {},
       places: [],
-      setSearchbarCoordinate: {}
+      setSearchbarCoordinate: {},
+      serachBarLoadingState: false
     }
   }
 
@@ -38,7 +39,11 @@ class App extends React.Component {
       this.addMarker({
         'latitude': place.geometry.location.lat(),
         'longitude':  place.geometry.location.lng(),
+        'name': place.name
       })
+    })
+    this.setState({
+      serachBarLoadingState: false
     })
     console.log("set places");
     console.log(this.state.places);
@@ -46,12 +51,15 @@ class App extends React.Component {
 
   find_places = (fields) => {
     this.addMarker({'latitude': fields.latitude, 'longitude': fields.longitude});
+    this.setState({
+      serachBarLoadingState: true
+    })
     this.state.getPlaces({'latitude':fields.latitude,'longitude':fields.longitude }, fields.radius, fields.filters, this.set_places);
   }
 
   addMarker = (fields) => {
     let gged = this.state.activeMarkers;
-    gged.push({'latitude':fields.latitude,'longitude':fields.longitude })
+    gged.push({'latitude':fields.latitude,'longitude':fields.longitude, 'name': fields.name ? fields.name : `${fields.latitude}, ${fields.longitude}` })
     this.setState({
       activeMarkers: gged
     });
@@ -63,13 +71,16 @@ class App extends React.Component {
     this.setState({
       mapCenter: {
         'latitude': coords.latitude,
-        'longitude': coords.longitude
+        'longitude': coords.longitude,
       },
+      places: [],
+      activeMarkers: []
     })
     this.state.setSearchbarCoordinate({
       'latitude': coords.latitude,
       'longitude': coords.longitude
     })
+    //console.log(this.state)
   }
 
   componentDidMount = () => {
@@ -79,7 +90,7 @@ class App extends React.Component {
         this.setState({
           mapCenter: {
             'latitude': coords.latitude,
-            'longitude': coords.longitude
+            'longitude': coords.longitude,
           },
           loaded: true
         });
@@ -100,6 +111,8 @@ class App extends React.Component {
             <span>click on anywhere on the map to select a coordinate</span>
           </div>
           <SearchBar 
+            places={this.state.places}
+            loading={this.state.serachBarLoadingState}
             set_setSearchbarDefaultCoordinate={this.set_setSearchbarDefaultCoordinate}
             find_places={this.find_places.bind(this)}
             currentLocation={this.state.mapCenter}
@@ -108,7 +121,7 @@ class App extends React.Component {
         <div className="result">
           <div className="map">
             {this.state.loaded ? <Map 
-              places={ this.state.activeMarkers.map(place => {return {name: `${place.latitude}, ${place.longitude}`, coordinate:{'latitude':place.latitude,'longitude':place.longitude }}}) }
+              places={ this.state.activeMarkers.map(place => {return {name: place.name, coordinate:{'latitude':place.latitude,'longitude':place.longitude }}}) }
               mapCenter={ this.state.mapCenter }
               set_getPlaces={this.set_getPlaces}
               set_places={this.set_places}

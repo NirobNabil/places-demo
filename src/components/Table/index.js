@@ -68,18 +68,16 @@ class DataTable extends React.Component{
       <Table 
         columns={columns} 
         dataSource={ 
-          this.props.data.length ? 
-            this.props.data.map( (data, i) => {
-              return {
-                'key': i,
-                'name': data.name,
-                'icon': data.icon,
-                'coordinate': `${data.geometry.location.lat()} , ${data.geometry.location.lng()}`,
-                'tags': data.types,
-                'vicinity': data.vicinity,
-              }
-            })
-            : []
+          this.props.data.map( (data, i) => {
+            return {
+              'key': i,
+              'name': data.name,
+              'icon': data.icon,
+              'coordinate': `${data.geometry.location.lat()} , ${data.geometry.location.lng()}`,
+              'tags': data.types,
+              'vicinity': data.vicinity,
+            }
+          })
         } 
       />
     )

@@ -118,7 +118,7 @@ class MapContainer extends React.Component {
         >
         <Marker
           onClick={this.onMarkerClick}
-          name={"current location"}
+          name={"Selected location"}
           position={{
             lat: this.props.mapCenter.latitude,
             lng: this.props.mapCenter.longitude

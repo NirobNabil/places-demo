@@ -1,6 +1,8 @@
 import React from 'react';
-import { Form, Icon, Input, Button, Select } from 'antd';
+import './index.scss';
+import { Form, Icon, Input, Button, Select, Spin } from 'antd';
 import env from '../../utils/constants';
+import { CSVLink } from "react-csv";
 
 const { Option } = Select;
 const API_KEY = env.API_KEY;
@@ -12,6 +14,8 @@ function hasErrors(fieldsError) {
 class SearchBarForm extends React.Component {
   constructor(props){
     super(props);
+    console.log("gggggggggggggggggggggggggggggggggggggggg")
+    console.log(props);
     this.props.set_setSearchbarDefaultCoordinate(this.setSearchbarDefaultCoordinate);
   }
 
@@ -88,7 +92,7 @@ class SearchBarForm extends React.Component {
           })(
             <Select
               mode="multiple"
-              style={{ width: '30em', flexGrow: '1' }}
+              style={{ width: '25em', flexGrow: '1' }}
               placeholder="Please select"
             >
               {['restaurant', 'movie_theater', 'atm', 'mosque', 'bank', 'doctor'].map( elem => <Option key={elem}> {elem} </Option> ) }
@@ -99,6 +103,10 @@ class SearchBarForm extends React.Component {
           <Button type="primary" htmlType="submit">
             Search
           </Button>
+          <Button type="primary" className="toCSVButton">
+            <CSVLink data={this.props.places}>-> CSV</CSVLink>
+          </Button>
+          {(this.props.loading == true) ? <Spin className="spin" /> : <></>}
         </Form.Item>
       </Form>
     );
