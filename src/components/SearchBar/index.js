@@ -64,6 +64,7 @@ class SearchBarForm extends React.Component {
             rules: [{ required: true, message: 'Please input your Latitude!' }],
           })(
             <Input
+              className="inputNumber"
               placehoder="Latitude"
             />,
           )}
@@ -73,6 +74,7 @@ class SearchBarForm extends React.Component {
             rules: [{ required: true, message: 'Please input your Longitude' }],
           })(
             <Input
+              className="inputNumber"
               placeholder="Longitude"
             />,
           )}
@@ -82,6 +84,7 @@ class SearchBarForm extends React.Component {
             rules: [{ required: true, message: 'Please input your range' }],
           })(
             <Input
+              className="inputNumber"
               placeholder="radius"
             />,
           )}

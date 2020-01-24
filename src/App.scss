@@ -14,7 +14,25 @@
     height: 10vw;
     justify-content: space-between;
     .protip{
+      display: flex;
       margin-left: 3rem;
+      flex-direction: column;
+      h1{
+        padding-left: 1rem;
+        margin-top: 1rem;
+        position: relative;
+        font-size: 2em;
+        //align-self: center;
+        &:before{
+          content: '';
+          position: absolute;
+          top: 0;
+          left:0;
+          height: 100%;
+          width: 4px;
+          background: #222;
+        }
+      }
     }
     form{
       align-self: center;

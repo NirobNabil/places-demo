@@ -4,6 +4,7 @@ import SearchBar from "./components/SearchBar";
 import Table from "./components/Table";
 import Map from "./components/Map";
 import { Card } from 'antd';
+import logo from "./static/icons/logo.png"
 
 class App extends React.Component {
   constructor(props){
@@ -107,8 +108,9 @@ class App extends React.Component {
       <div className="motherContainer">
         <div className="search">
           <div class="protip">
-            <h3>Pro tip! </h3>
-            <span>click on anywhere on the map to select a coordinate</span>
+            <img width="300px" src={logo} />
+            <h1>Places Near You</h1>
+            <span>Click one anywhere on the map to select the coordinate</span>
           </div>
           <SearchBar 
             places={this.state.places}
