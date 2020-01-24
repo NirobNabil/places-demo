@@ -54,9 +54,6 @@ class MapContainer extends React.Component {
   //     });
   //   }
   // }
-  componentDidUpdate = () => {
-    console.log(this.props.places)
-  }
   panMapTo = () => {
 
   }
@@ -77,13 +74,27 @@ class MapContainer extends React.Component {
     console.log("came fetchplaces");
     let service = new this.props.google.maps.places.PlacesService(this.state.map);
     var coordinateOBJ = new this.props.google.maps.LatLng(coordinate.latitude,coordinate.longitude);
-    var request = {
-      location: coordinateOBJ,
-      radius: '500',
-      type: ['restaurant']
-    };
-    console.log("gge pringting");
-    service.nearbySearch(request, (e) => {console.log(e); callback(e)});
+    let data = []
+    function addPlaces(places, done){
+      data = data.concat(places);
+      console.log("places data");
+      console.log(places);
+      console.log(data);
+      if(done){
+        console.log("came")
+        callback(data);
+      }
+    }
+    types.forEach( (type,i) => {
+      console.log(types.length, i);
+      var request = {
+        location: coordinateOBJ,
+        radius: radius,
+        type: type
+      };
+      console.log("gge pringting");
+      service.nearbySearch(request, (e) => {console.log(e); addPlaces(e, (i==types.length-1) ? true : false )});
+    });
   }
 
   render() {

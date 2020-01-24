@@ -11,8 +11,15 @@ class App extends React.Component {
       activeMarkers: [],
       mapCenter: {},
       getPlaces: {},
-      places: []
+      places: [],
+      setSearchbarDefaultCoordinate: {}
     }
+  }
+
+  set_setSearchbarDefaultCoordinate = (func) => {
+    this.setState({
+      setSearchbarDefaultCoordinate: func
+    })
   }
 
   set_getPlaces = (func) => {
@@ -26,8 +33,19 @@ class App extends React.Component {
     this.setState({
       'places': places
     })
+    this.state.places.forEach( (place) => {
+      this.addMarker({
+        'latitude': place.geometry.location.lat(),
+        'longitude':  place.geometry.location.lng(),
+      })
+    })
     console.log("set places");
     console.log(this.state.places);
+  }
+
+  find_places = (fields) => {
+    this.addMarker({'latitude': fields.latitude, 'longitude': fields.longitude});
+    this.state.getPlaces({'latitude':fields.latitude,'longitude':fields.longitude }, fields.radius, fields.filters, this.set_places);
   }
 
   addMarker (fields) {
@@ -36,9 +54,8 @@ class App extends React.Component {
     this.setState({
       activeMarkers: gged
     });
-    console.log(this.state.activeMarkers);
-    console.log(this.state.getPlaces);
-    this.state.getPlaces({'latitude':fields.latitude,'longitude':fields.longitude }, fields.radius, fields.filters, this.set_places);
+    // console.log(this.state.activeMarkers);
+    // console.log(this.state.getPlaces);
   }
 
   componentDidMount = () => {
@@ -52,6 +69,10 @@ class App extends React.Component {
           },
           loaded: true
         });
+        this.state.setSearchbarDefaultCoordinate({
+          'latitude': coords.latitude,
+          'longitude': coords.longitude
+        })
       });
     }
   }
@@ -59,7 +80,13 @@ class App extends React.Component {
   render(){
     return (     
       <div className="motherContainer">
-        <div className="search"><SearchBar addMarker={this.addMarker.bind(this)} /></div>
+        <div className="search">
+          <SearchBar 
+            set_setSearchbarDefaultCoordinate={this.set_setSearchbarDefaultCoordinate}
+            find_places={this.find_places.bind(this)}
+            currentLocation={this.state.mapCenter}
+          />
+        </div>
         <div className="result">
           <div className="map">
             {this.state.loaded ? <Map 

@@ -9,32 +9,21 @@ function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 
-// function getPlaces(coo, radius, types){
-//   console.log(coo, radius, types);
-//   types.forEach( (type) => {
-//     console.log(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?
-//                 location=${coo.latitude},${coo.longitude}
-//                 &radius=${radius}
-//                 &type=${type}
-//                 &key=${API_KEY}`);
-//     fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?
-//            location=${coo.latitude},${coo.longitude}
-//            &radius=${radius}
-//            &type=${type}
-//            &key=${API_KEY}`)
-//     .then((response) => {
-//       return response.json();
-//     })
-//     .then((myJson) => {
-//       console.log(myJson);
-//     })
-//     .catch( (err) => {console.log(err)});
-//   })
-// }
-
 class SearchBarForm extends React.Component {
   constructor(props){
-    super(props)
+    super(props);
+    this.props.set_setSearchbarDefaultCoordinate(this.setSearchbarDefaultCoordinate);
+  }
+
+  setSearchbarDefaultCoordinate = (coordinate) => {
+    this.props.form.setFields({
+      'latitude': {
+        value: coordinate.latitude,
+      },
+      'longitude': {
+        value: coordinate.longitude,
+      },
+    })
   }
 
   handleSubmit = (e) => {
@@ -43,7 +32,7 @@ class SearchBarForm extends React.Component {
       if (!err) {
         console.log('Received values of form: ', values);
         console.log("went");
-        this.props.addMarker(values);
+        this.props.find_places(values);
         //getPlaces({latitude: values.latitude, longitude: values.longitude}, values.radius, values.filters)
       }
     });
@@ -102,7 +91,7 @@ class SearchBarForm extends React.Component {
               style={{ width: '40em', flexGrow: '1' }}
               placeholder="Please select"
             >
-              {['restaurant', 'coffee shop', 'park', 'theatre', 'shopping mall'].map( elem => <Option key={elem}> {elem} </Option> ) }
+              {['restaurant', 'movie_theater', 'bus_station', 'bank', 'doctor'].map( elem => <Option key={elem}> {elem} </Option> ) }
             </Select>
           )}
         </Form.Item>
@@ -116,6 +105,8 @@ class SearchBarForm extends React.Component {
   }
 }
 
-const SearchBar = Form.create({ name: 'SearchBar' })(SearchBarForm);
+const SearchBar = Form.create({ 
+  name: 'SearchBar', 
+})(SearchBarForm);
 
 export default SearchBar;
