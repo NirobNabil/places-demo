@@ -12,6 +12,10 @@
     padding-right: 3em;
     width: 100vw;
     height: 10vw;
+    justify-content: space-between;
+    .protip{
+      margin-left: 3rem;
+    }
     form{
       align-self: center;
     }

@@ -97,6 +97,11 @@ class MapContainer extends React.Component {
     });
   }
 
+  handleClick = (mapProps, map, e) => {
+    //this.props.addMarker({'latitude': e.latLng.lat(), 'longitude': e.latLng.lng()})
+    this.props.updateCurrentLocation({'latitude': e.latLng.lat(), 'longitude': e.latLng.lng()})
+  }
+
   render() {
     return (
       this.state.loaded ? 
@@ -109,6 +114,7 @@ class MapContainer extends React.Component {
             lat: this.props.mapCenter.latitude,
             lng: this.props.mapCenter.longitude
           }}
+          onClick={this.handleClick}
         >
         <Marker
           onClick={this.onMarkerClick}

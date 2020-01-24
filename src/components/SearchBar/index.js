@@ -88,7 +88,7 @@ class SearchBarForm extends React.Component {
           })(
             <Select
               mode="multiple"
-              style={{ width: '40em', flexGrow: '1' }}
+              style={{ width: '30em', flexGrow: '1' }}
               placeholder="Please select"
             >
               {['restaurant', 'movie_theater', 'atm', 'mosque', 'bank', 'doctor'].map( elem => <Option key={elem}> {elem} </Option> ) }
@@ -97,7 +97,7 @@ class SearchBarForm extends React.Component {
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Submit
+            Search
           </Button>
         </Form.Item>
       </Form>

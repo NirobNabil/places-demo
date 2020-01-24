@@ -3,6 +3,7 @@ import "./App.scss";
 import SearchBar from "./components/SearchBar";
 import Table from "./components/Table";
 import Map from "./components/Map";
+import { Card } from 'antd';
 
 class App extends React.Component {
   constructor(props){
@@ -12,13 +13,13 @@ class App extends React.Component {
       mapCenter: {},
       getPlaces: {},
       places: [],
-      setSearchbarDefaultCoordinate: {}
+      setSearchbarCoordinate: {}
     }
   }
 
   set_setSearchbarDefaultCoordinate = (func) => {
     this.setState({
-      setSearchbarDefaultCoordinate: func
+      setSearchbarCoordinate: func
     })
   }
 
@@ -48,7 +49,7 @@ class App extends React.Component {
     this.state.getPlaces({'latitude':fields.latitude,'longitude':fields.longitude }, fields.radius, fields.filters, this.set_places);
   }
 
-  addMarker (fields) {
+  addMarker = (fields) => {
     let gged = this.state.activeMarkers;
     gged.push({'latitude':fields.latitude,'longitude':fields.longitude })
     this.setState({
@@ -56,6 +57,19 @@ class App extends React.Component {
     });
     // console.log(this.state.activeMarkers);
     // console.log(this.state.getPlaces);
+  }
+
+  updateCurrentLocation = (coords) => {
+    this.setState({
+      mapCenter: {
+        'latitude': coords.latitude,
+        'longitude': coords.longitude
+      },
+    })
+    this.state.setSearchbarCoordinate({
+      'latitude': coords.latitude,
+      'longitude': coords.longitude
+    })
   }
 
   componentDidMount = () => {
@@ -69,7 +83,7 @@ class App extends React.Component {
           },
           loaded: true
         });
-        this.state.setSearchbarDefaultCoordinate({
+        this.state.setSearchbarCoordinate({
           'latitude': coords.latitude,
           'longitude': coords.longitude
         })
@@ -81,6 +95,10 @@ class App extends React.Component {
     return (     
       <div className="motherContainer">
         <div className="search">
+          <div class="protip">
+            <h3>Pro tip! </h3>
+            <span>click on anywhere on the map to select a coordinate</span>
+          </div>
           <SearchBar 
             set_setSearchbarDefaultCoordinate={this.set_setSearchbarDefaultCoordinate}
             find_places={this.find_places.bind(this)}
@@ -94,6 +112,8 @@ class App extends React.Component {
               mapCenter={ this.state.mapCenter }
               set_getPlaces={this.set_getPlaces}
               set_places={this.set_places}
+              addMarker={this.addMarker.bind(this)}
+              updateCurrentLocation={this.updateCurrentLocation}
             /> : <></>}
           </div>
           <div className="table"><Table data={this.state.places}/></div>
