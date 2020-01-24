@@ -25,6 +25,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "proxy": "https://maps.googleapis.com/maps/api/place/",
   "homepage": "https://nirobnabil.github.io/places-demo",
   "browserslist": {
     "production": [

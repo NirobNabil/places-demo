@@ -1,11 +1,36 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Select } from 'antd';
+import env from '../../utils/constants';
 
 const { Option } = Select;
+const API_KEY = env.API_KEY;
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
+
+// function getPlaces(coo, radius, types){
+//   console.log(coo, radius, types);
+//   types.forEach( (type) => {
+//     console.log(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?
+//                 location=${coo.latitude},${coo.longitude}
+//                 &radius=${radius}
+//                 &type=${type}
+//                 &key=${API_KEY}`);
+//     fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?
+//            location=${coo.latitude},${coo.longitude}
+//            &radius=${radius}
+//            &type=${type}
+//            &key=${API_KEY}`)
+//     .then((response) => {
+//       return response.json();
+//     })
+//     .then((myJson) => {
+//       console.log(myJson);
+//     })
+//     .catch( (err) => {console.log(err)});
+//   })
+// }
 
 class SearchBarForm extends React.Component {
   constructor(props){
@@ -19,6 +44,7 @@ class SearchBarForm extends React.Component {
         console.log('Received values of form: ', values);
         console.log("went");
         this.props.addMarker(values);
+        //getPlaces({latitude: values.latitude, longitude: values.longitude}, values.radius, values.filters)
       }
     });
   };
@@ -59,15 +85,24 @@ class SearchBarForm extends React.Component {
           )}
         </Form.Item>
         <Form.Item validateStatus="success">
+          {getFieldDecorator('radius', {
+            rules: [{ required: true, message: 'Please input your range' }],
+          })(
+            <Input
+              placeholder="radius"
+            />,
+          )}
+        </Form.Item>
+        <Form.Item validateStatus="success">
           {getFieldDecorator('filters', {
-            rules: [{ required: true, message: 'Please input your Longitude' }],
+            rules: [{ required: true, message: ' ' }],
           })(
             <Select
               mode="multiple"
               style={{ width: '40em', flexGrow: '1' }}
               placeholder="Please select"
             >
-              {['restaurants', 'coffee shop', 'park', 'theatre', 'shopping mall'].map( elem => <Option key={elem}> {elem} </Option> ) }
+              {['restaurant', 'coffee shop', 'park', 'theatre', 'shopping mall'].map( elem => <Option key={elem}> {elem} </Option> ) }
             </Select>
           )}
         </Form.Item>

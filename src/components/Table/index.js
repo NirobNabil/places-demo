@@ -3,15 +3,21 @@ import { Table, Divider, Tag } from 'antd';
 
 const columns = [
   {
+    title: 'icon',
+    dataIndex: 'icon',
+    key: 'icon',
+    render: icon => <img src={icon} />
+  },
+  {
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
     render: text => <a>{text}</a>,
   },
   {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
+    title: 'vicinity',
+    dataIndex: 'vicinity',
+    key: 'vicinity',
   }, 
   {
     title: 'Lat/Lon',
@@ -24,12 +30,8 @@ const columns = [
     render: tags => (
       <span>
         {tags.map(tag => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
           return (
-            <Tag color={color} key={tag}>
+            <Tag key={tag}>
               {tag.toUpperCase()}
             </Tag>
           );
@@ -39,35 +41,47 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    key: '1',
-    name: 'IZAKAYA',
-    coordinate: 32 + " / " + 31.23,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'child friendly'],
-  },
-  {
-    key: '2',
-    name: 'Dacca',
-    coordinate: 42.23 + " / " + 54,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Dacca',
-    coordinate: 42.23 + " / " + 54,
-    address: 'London No. 1 Lake Park',
-    tags: ['NICE'],
-  },
-];
+// const data = data.map( (data, i) => {
+//   return {
+//     'key': i,
+//     'name': data.name,
+//     'icon': data.icon,
+//     'coordinate': `${data.geometry.location.lat()} , ${data.geometry.location.lng()}`,
+//     'tags': data.types,
+//     'vicinity': data.vicinity
+//   }
+// })
+
+
 
 
 class DataTable extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      dataSource: {}
+    }
+  }
+
   render(){
     return (
-      <Table columns={columns} dataSource={data} />
+      <Table 
+        columns={columns} 
+        dataSource={ 
+          this.props.data.length ? 
+            this.props.data.map( (data, i) => {
+              return {
+                'key': i,
+                'name': data.name,
+                'icon': data.icon,
+                'coordinate': `${data.geometry.location.lat()} , ${data.geometry.location.lng()}`,
+                'tags': data.types,
+                'vicinity': data.vicinity,
+              }
+            })
+            : []
+        } 
+      />
     )
   }
 }

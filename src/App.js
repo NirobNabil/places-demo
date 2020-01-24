@@ -8,17 +8,52 @@ class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      selectedPlaces: [],
+      activeMarkers: [],
+      mapCenter: {},
+      getPlaces: {},
+      places: []
     }
   }
 
+  set_getPlaces = (func) => {
+    console.log("in appjs setgetplaces", func);
+    this.setState({
+      getPlaces: func
+    })
+  }
+
+  set_places = (places) => {
+    this.setState({
+      'places': places
+    })
+    console.log("set places");
+    console.log(this.state.places);
+  }
+
   addMarker (fields) {
-    let gged = this.state.selectedPlaces;
+    let gged = this.state.activeMarkers;
     gged.push({'latitude':fields.latitude,'longitude':fields.longitude })
     this.setState({
-      selectedPlaces: gged
+      activeMarkers: gged
     });
-    console.log(this.state.selectedPlaces);
+    console.log(this.state.activeMarkers);
+    console.log(this.state.getPlaces);
+    this.state.getPlaces({'latitude':fields.latitude,'longitude':fields.longitude }, fields.radius, fields.filters, this.set_places);
+  }
+
+  componentDidMount = () => {
+    if (navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(pos => {
+        const coords = pos.coords;
+        this.setState({
+          mapCenter: {
+            'latitude': coords.latitude,
+            'longitude': coords.longitude
+          },
+          loaded: true
+        });
+      });
+    }
   }
   
   render(){
@@ -26,11 +61,15 @@ class App extends React.Component {
       <div className="motherContainer">
         <div className="search"><SearchBar addMarker={this.addMarker.bind(this)} /></div>
         <div className="result">
-          <div className="map"><Map places={
-            this.state.selectedPlaces.map(place => {return {name: "gg", coordinate:{'latitude':place.latitude,'longitude':place.longitude }}})
-          }/>
+          <div className="map">
+            {this.state.loaded ? <Map 
+              places={ this.state.activeMarkers.map(place => {return {name: "gg", coordinate:{'latitude':place.latitude,'longitude':place.longitude }}}) }
+              mapCenter={ this.state.mapCenter }
+              set_getPlaces={this.set_getPlaces}
+              set_places={this.set_places}
+            /> : <></>}
           </div>
-          <div className="table"><Table /></div>
+          <div className="table"><Table data={this.state.places}/></div>
         </div>
       </div>
     ); 
