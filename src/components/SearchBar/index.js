@@ -91,7 +91,7 @@ class SearchBarForm extends React.Component {
               style={{ width: '40em', flexGrow: '1' }}
               placeholder="Please select"
             >
-              {['restaurant', 'movie_theater', 'bus_station', 'bank', 'doctor'].map( elem => <Option key={elem}> {elem} </Option> ) }
+              {['restaurant', 'movie_theater', 'atm', 'mosque', 'bank', 'doctor'].map( elem => <Option key={elem}> {elem} </Option> ) }
             </Select>
           )}
         </Form.Item>

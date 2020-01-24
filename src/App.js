@@ -90,7 +90,7 @@ class App extends React.Component {
         <div className="result">
           <div className="map">
             {this.state.loaded ? <Map 
-              places={ this.state.activeMarkers.map(place => {return {name: "gg", coordinate:{'latitude':place.latitude,'longitude':place.longitude }}}) }
+              places={ this.state.activeMarkers.map(place => {return {name: `${place.latitude}, ${place.longitude}`, coordinate:{'latitude':place.latitude,'longitude':place.longitude }}}) }
               mapCenter={ this.state.mapCenter }
               set_getPlaces={this.set_getPlaces}
               set_places={this.set_places}
