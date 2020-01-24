@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/places-demo/static/css/main.6f404bb4.chunk.css",
-    "main.js": "/places-demo/static/js/main.d12a1cf1.chunk.js",
-    "main.js.map": "/places-demo/static/js/main.d12a1cf1.chunk.js.map",
+    "main.js": "/places-demo/static/js/main.1d3c667a.chunk.js",
+    "main.js.map": "/places-demo/static/js/main.1d3c667a.chunk.js.map",
     "runtime-main.js": "/places-demo/static/js/runtime-main.617a779b.js",
     "runtime-main.js.map": "/places-demo/static/js/runtime-main.617a779b.js.map",
     "static/css/2.624e4bf4.chunk.css": "/places-demo/static/css/2.624e4bf4.chunk.css",
     "static/js/2.a4235f1f.chunk.js": "/places-demo/static/js/2.a4235f1f.chunk.js",
     "static/js/2.a4235f1f.chunk.js.map": "/places-demo/static/js/2.a4235f1f.chunk.js.map",
     "index.html": "/places-demo/index.html",
-    "precache-manifest.381592071471de41f5ea9c4ae453cdc0.js": "/places-demo/precache-manifest.381592071471de41f5ea9c4ae453cdc0.js",
+    "precache-manifest.92b9425deb0ace644e9beda474c44e1f.js": "/places-demo/precache-manifest.92b9425deb0ace644e9beda474c44e1f.js",
     "service-worker.js": "/places-demo/service-worker.js",
     "static/css/2.624e4bf4.chunk.css.map": "/places-demo/static/css/2.624e4bf4.chunk.css.map",
     "static/css/main.6f404bb4.chunk.css.map": "/places-demo/static/css/main.6f404bb4.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.624e4bf4.chunk.css",
     "static/js/2.a4235f1f.chunk.js",
     "static/css/main.6f404bb4.chunk.css",
-    "static/js/main.d12a1cf1.chunk.js"
+    "static/js/main.1d3c667a.chunk.js"
   ]
 }
